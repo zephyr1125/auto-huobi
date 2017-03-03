@@ -1,5 +1,5 @@
 var request = require('request');
-var crypto = require("crypto");
+var util = require("./util");
 
 var method = 'get_account_info';
 
@@ -16,7 +16,7 @@ getAccountInfo(
     "https://api.huobi.com/apiv3");
 
 function getAccountInfo(url){
-    var signed = md5(
+    var signed = util.md5(
         "access_key="+access_key+
         "&created="+timestamp+
         "&method="+method+
@@ -34,7 +34,3 @@ function getAccountInfo(url){
         console.log(body);
     });
 }
-
-function md5 (text) {
-  return crypto.createHash('md5').update(text).digest('hex');
-};
